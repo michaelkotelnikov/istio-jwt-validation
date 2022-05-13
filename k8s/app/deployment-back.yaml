@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uid-server
+  namespace: webserver
+  labels:
+    app: uid-server
+spec:
+  selector:
+    matchLabels:
+      app: uid-server
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: uid-server
+      annotations:
+        sidecar.istio.io/inject: 'true'
+    spec:
+      containers:
+        - name: apache
+          image: docker.io/mkotelni/uid-flask:0.0.2
+          ports:
+            - containerPort: 5000
+              name: uid-server
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"

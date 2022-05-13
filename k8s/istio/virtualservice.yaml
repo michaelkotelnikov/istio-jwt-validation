@@ -1,0 +1,27 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: webserver
+  namespace: webserver
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - webserver-gateway
+  http:
+  - match:
+    - uri:
+        exact: /
+    - uri:
+        exact: /private
+    - uri:
+        exact: /api
+    - uri:
+        exact: /logout
+    - uri:
+        prefix: /oidc_callback
+    route:
+    - destination:
+        host: webserver
+        port:
+          number: 8080

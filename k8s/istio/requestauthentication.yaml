@@ -1,0 +1,12 @@
+apiVersion: security.istio.io/v1beta1
+kind: RequestAuthentication
+metadata:
+  name: jwt-validation
+  namespace: webserver
+spec:
+  selector:
+    matchLabels:
+      app: uid-server
+  jwtRules:
+  - issuer: https://keycloak-rhsso.apps.cluster-dgszv.dgszv.sandbox500.opentlc.com/auth/realms/pysaar
+    jwksUri: https://keycloak-rhsso.apps.cluster-dgszv.dgszv.sandbox500.opentlc.com/auth/realms/pysaar/protocol/openid-connect/certs

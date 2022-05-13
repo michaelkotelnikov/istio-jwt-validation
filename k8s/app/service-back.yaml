@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: uid-server
+  name: uid-server
+spec:
+  ports:
+  - name: http-8080
+    port: 8080
+    targetPort: 5000
+  selector:
+    app: uid-server
+  sessionAffinity: None
+  type: ClusterIP

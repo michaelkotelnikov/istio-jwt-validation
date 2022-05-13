@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: webserver
+  namespace: webserver
+spec:
+  host: webserver
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: uid-server
+  namespace: webserver
+spec:
+  host: uid-server
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
