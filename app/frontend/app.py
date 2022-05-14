@@ -5,6 +5,10 @@ from flask import Flask, g, url_for, redirect
 from flask_oidc import OpenIDConnect
 from oauth2client.client import OAuth2Credentials
 import requests
+import os
+
+openid_realm = os.environ['OPENID_REALM']
+openid_host = os.environ['OPENID_HOST']
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -17,7 +21,7 @@ app.config.update({
     'OIDC_ID_TOKEN_COOKIE_SECURE': False,
     'OIDC_REQUIRE_VERIFIED_EMAIL': False,
     'OIDC_USER_INFO_ENABLED': True,
-    'OIDC_OPENID_REALM': 'flask-demo',
+    'OIDC_OPENID_REALM': openid_realm,
     'OIDC_SCOPES': ['openid', 'email', 'profile'],
     'OIDC_INTROSPECTION_AUTH_METHOD': 'client_secret_post'
 })
