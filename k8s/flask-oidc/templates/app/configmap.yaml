@@ -3,16 +3,16 @@ data:
   client_secrets.json: |
     {
         "web": {
-            "issuer": "{{ .Values.oidc.hostname }}/auth/realms/{{ .Values.oidc.realm }}",
-            "auth_uri": "{{ .Values.oidc.hostname }}/auth/realms/{{ .Values.oidc.realm }}/protocol/openid-connect/auth",
+            "issuer": "{{ include "oidc.url" . }}/auth/realms/{{ .Values.oidc.realm }}",
+            "auth_uri": "{{ include "oidc.url" . }}/auth/realms/{{ .Values.oidc.realm }}/protocol/openid-connect/auth",
             "client_id": "{{ .Values.oidc.client.id }}",
             "client_secret": "{{ .Values.oidc.client.secret }}",
             "redirect_uris": [
                 "*"
             ],
-            "userinfo_uri": "{{ .Values.oidc.hostname }}/auth/realms/{{ .Values.oidc.realm }}/protocol/openid-connect/userinfo", 
-            "token_uri": "{{ .Values.oidc.hostname }}/auth/realms/{{ .Values.oidc.realm }}/protocol/openid-connect/token",
-            "token_introspection_uri": "{{ .Values.oidc.hostname }}/auth/realms/{{ .Values.oidc.realm }}/protocol/openid-connect/token/introspect"
+            "userinfo_uri": "{{ include "oidc.url" . }}/auth/realms/{{ .Values.oidc.realm }}/protocol/openid-connect/userinfo", 
+            "token_uri": "{{ include "oidc.url" . }}/auth/realms/{{ .Values.oidc.realm }}/protocol/openid-connect/token",
+            "token_introspection_uri": "{{ include "oidc.url" . }}/auth/realms/{{ .Values.oidc.realm }}/protocol/openid-connect/token/introspect"
         }
     }
 kind: ConfigMap

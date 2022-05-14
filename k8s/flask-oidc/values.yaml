@@ -1,6 +1,13 @@
 oidc:
-  hostname: https://keycloak-rhsso.apps.cluster-jzbs4.jzbs4.sandbox1713.opentlc.com
+  hostname:
+    name: keycloak-rhsso.apps.cluster-jzbs4.jzbs4.sandbox1713.opentlc.com
+    secure: true
   client:
     id: flask-app
     secret: 49ef7a38-113d-4fcf-a812-1d9ebf254ea4
   realm: pysaar
+
+backend:
+  service:
+    name: uid-server
+    port: 8080

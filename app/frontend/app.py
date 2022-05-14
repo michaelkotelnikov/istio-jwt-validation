@@ -9,6 +9,7 @@ import os
 
 openid_realm = os.environ['OPENID_REALM']
 openid_host = os.environ['OPENID_HOST']
+backend_url = os.environ['BACKEND_URL']
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -56,10 +57,8 @@ def hello_me():
         try:
             access_token = OAuth2Credentials.from_json(oidc.credentials_store[user_id]).access_token
             print('access_token=<%s>' % access_token)
-            #headers = {'Authorization': 'Bearer %s' % (access_token)}
             headers ={'Authorization': 'Bearer %s' % access_token}
-            # YOLO
-            id = "Hello, your secret number from the backend server is " + requests.get('http://uid-server.webserver.svc.cluster.local:8080/id', headers=headers).text + "."
+            id = "Hello, your secret number from the backend server is " + requests.get(backend_url, headers=headers).text + "."
         except:
             print("Could not access id-service")
             id = "Hello %s" % username
@@ -68,9 +67,9 @@ def hello_me():
     return ("""%s your email is %s and your user_id is %s!
                <ul>
                  <li><a href="/">Home</a></li>
-                 <li><a href="//keycloak-rhsso.apps.cluster-dgszv.dgszv.sandbox500.opentlc.com/auth/realms/pysaar/account?referrer=flask-app&referrer_uri=https://webserver-webserver.apps.cluster-dgszv.dgszv.sandbox500.opentlc.com/private&">Account</a></li>
+                 <li><a href="//%s/auth/realms/%s/account">Account</a></li>
                 </ul>""" %
-            (id, email, user_id))
+            (id, email, user_id, openid_host, openid_realm))
 
 
 @app.route('/api', methods=['POST'])

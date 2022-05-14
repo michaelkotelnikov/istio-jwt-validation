@@ -19,7 +19,14 @@ spec:
     spec:
       containers:
         - name: apache
-          image: docker.io/mkotelni/oidc-flask:0.0.16
+          image: docker.io/mkotelni/oidc-flask:0.0.18
+          env:
+          - name: OPENID_REALM
+            value: {{ .Values.oidc.realm }}
+          - name: OPENID_HOST
+            value: {{ .Values.oidc.hostname.name }}
+          - name: BACKEND_URL
+            value: {{ template "backend.url" . }}
           ports:
             - containerPort: 5000
               name: webserver

@@ -8,5 +8,5 @@ spec:
     matchLabels:
       app: uid-server
   jwtRules:
-  - issuer: https://keycloak-rhsso.apps.cluster-jzbs4.jzbs4.sandbox1713.opentlc.com/auth/realms/pysaar
-    jwksUri: https://keycloak-rhsso.apps.cluster-jzbs4.jzbs4.sandbox1713.opentlc.com/auth/realms/pysaar/protocol/openid-connect/certs
+  - issuer: {{ include "oidc.url" . }}/auth/realms/{{ .Values.oidc.realm }}
+    jwksUri: {{ include "oidc.url" . }}/auth/realms/{{ .Values.oidc.realm }}/protocol/openid-connect/certs
