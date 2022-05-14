@@ -4,6 +4,7 @@ metadata:
   labels:
     app: webserver
   name: webserver
+  namespace: webserver
 spec:
   ports:
   - name: http-8080

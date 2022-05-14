@@ -53,7 +53,7 @@ def hello_me():
             access_token = OAuth2Credentials.from_json(oidc.credentials_store[user_id]).access_token
             print('access_token=<%s>' % access_token)
             #headers = {'Authorization': 'Bearer %s' % (access_token)}
-            headers ={'Authorization': 'Bearer fakejwt'}
+            headers ={'Authorization': 'Bearer %s' % access_token}
             # YOLO
             id = "Hello, your secret number from the backend server is " + requests.get('http://uid-server.webserver.svc.cluster.local:8080/id', headers=headers).text + "."
         except:

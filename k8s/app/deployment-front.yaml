@@ -19,10 +19,14 @@ spec:
     spec:
       containers:
         - name: apache
-          image: docker.io/mkotelni/oidc-flask:0.0.14
+          image: docker.io/mkotelni/oidc-flask:0.0.16
           ports:
             - containerPort: 5000
               name: webserver
+          volumeMounts:
+            - mountPath: /app/client_secrets.json
+              name: oidc-config
+              subPath: client_secrets.json
           resources:
             requests:
               memory: "128Mi"
@@ -30,3 +34,11 @@ spec:
             limits:
               memory: "512Mi"
               cpu: "500m"
+      volumes:
+        - configMap:
+            defaultMode: 420
+            items:
+            - key: client_secrets.json
+              path: client_secrets.json
+            name: oidc-config
+          name: oidc-config
