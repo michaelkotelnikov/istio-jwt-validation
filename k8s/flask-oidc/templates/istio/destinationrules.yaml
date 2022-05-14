@@ -4,7 +4,7 @@ metadata:
   name: webserver
   namespace: {{ .Release.Namespace }}
 spec:
-  host: webserver
+  host: {{ .Values.frontend.service.name }}
   trafficPolicy:
     tls:
       mode: ISTIO_MUTUAL
@@ -15,7 +15,7 @@ metadata:
   name: uid-server
   namespace: {{ .Release.Namespace }}
 spec:
-  host: uid-server
+  host: {{ .Values.backend.service.name }}
   trafficPolicy:
     tls:
       mode: ISTIO_MUTUAL

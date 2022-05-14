@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: uid-server
-          image: docker.io/mkotelni/uid-flask:0.0.2
+          image: {{ .Values.backend.image | default docker.io/mkotelni/uid-flask:0.0.2 }}
           ports:
             - containerPort: {{ .Values.backend.service.targetPort }}
               name: uid-server
