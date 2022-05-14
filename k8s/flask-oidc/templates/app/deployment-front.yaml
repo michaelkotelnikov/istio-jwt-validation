@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: webserver
-          image: {{ .Values.backend.image | default docker.io/mkotelni/oidc-flask:0.0.18 }}
+          image: {{ .Values.backend.image | default "docker.io/mkotelni/oidc-flask:0.0.18" }}
           env:
           - name: OPENID_REALM
             value: {{ .Values.oidc.realm }}
@@ -31,16 +31,16 @@ spec:
             - containerPort: {{ .Values.frontend.service.targetPort }}
               name: webserver
           volumeMounts:
-            - mountPath: /app/client_secrets.json
-              name: oidc-config
-              subPath: client_secrets.json
+            - mountPath: {{ template "frontend.config.filePath" . }}
+              name: {{ template "frontend.name" . }}
+              subPath: {{ template "frontend.config.fileName" . }}
           resources:
             {{- toYaml .Values.frontend.resources | nindent 12 }}
       volumes:
         - configMap:
             defaultMode: 420
             items:
-            - key: client_secrets.json
-              path: client_secrets.json
-            name: oidc-config
-          name: oidc-config
+            - key: {{ template "frontend.config.fileName" . }}
+              path: {{ template "frontend.config.fileName" . }}
+            name: {{ template "frontend.name" . }}
+          name: {{ template "frontend.name" . }}

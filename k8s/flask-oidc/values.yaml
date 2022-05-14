@@ -32,3 +32,6 @@ frontend:
     limits:
       memory: "512Mi"
       cpu: "500m"
+  config:
+    path: /app
+    name: client_secrets

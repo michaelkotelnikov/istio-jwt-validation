@@ -1,4 +1,18 @@
 {{/*
+Generate a name for the frontend resources
+*/}}
+{{- define "frontend.name" }}
+{{- printf .Values.frontend.service.name }}
+{{- end }}
+
+{{/*
+Generate a name for the backend resources
+*/}}
+{{- define "backend.name" }}
+{{- printf .Values.backend.service.name }}
+{{- end }}
+
+{{/*
 Translate the `secure` parameter to the relevant url
 */}}
 {{- define "oidc.url" }}
@@ -42,4 +56,18 @@ Selector labels - backend
 */}}
 {{- define "backend.selectorLabels" -}}
 app: {{ .Values.backend.service.name }}
+{{- end }}
+
+{{/*
+Generate config file for oidc configurations
+*/}}
+{{- define "frontend.config.fileName" -}}
+{{- printf "%s.json" .Values.frontend.config.name }}
+{{- end }}
+
+{{/*
+Generate config file path for oidc configurations
+*/}}
+{{- define "frontend.config.filePath" -}}
+{{- printf "%s/%s" .Values.frontend.config.path (include "frontend.config.fileName" .) }}
 {{- end }}

@@ -17,5 +17,5 @@ data:
     }
 kind: ConfigMap
 metadata:
-  name: oidc-config
+  name: {{ template "frontend.name" . }}
   namespace: {{ .Release.Namespace }}
