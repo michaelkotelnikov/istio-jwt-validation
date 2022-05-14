@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: webserver
-  namespace: webserver
+  namespace: {{ .Release.Namespace }}
   labels:
     app: webserver
 spec:
@@ -28,19 +28,14 @@ spec:
           - name: BACKEND_URL
             value: {{ template "backend.url" . }}
           ports:
-            - containerPort: 5000
+            - containerPort: {{ .Values.frontend.service.targetPort }}
               name: webserver
           volumeMounts:
             - mountPath: /app/client_secrets.json
               name: oidc-config
               subPath: client_secrets.json
           resources:
-            requests:
-              memory: "128Mi"
-              cpu: "250m"
-            limits:
-              memory: "512Mi"
-              cpu: "500m"
+            {{- toYaml .Values.frontend.resources | nindent 12 }}
       volumes:
         - configMap:
             defaultMode: 420

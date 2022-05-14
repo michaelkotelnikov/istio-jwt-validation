@@ -4,12 +4,12 @@ metadata:
   labels:
     app: uid-server
   name: uid-server
-  namespace: webserver
+  namespace: {{ .Release.Namespace }}
 spec:
   ports:
-  - name: http-8080
-    port: 8080
-    targetPort: 5000
+  - name: http-{{ .Values.backend.service.port }}
+    port: {{ .Values.backend.service.port }}
+    targetPort: {{ .Values.backend.service.targetPort }}
   selector:
     app: uid-server
   sessionAffinity: None

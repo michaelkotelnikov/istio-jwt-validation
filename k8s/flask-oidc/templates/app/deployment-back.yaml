@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: uid-server
-  namespace: webserver
+  namespace: {{ .Release.Namespace }}
   labels:
     app: uid-server
 spec:
@@ -21,12 +21,7 @@ spec:
         - name: apache
           image: docker.io/mkotelni/uid-flask:0.0.2
           ports:
-            - containerPort: 5000
+            - containerPort: {{ .Values.backend.service.targetPort }}
               name: uid-server
           resources:
-            requests:
-              memory: "128Mi"
-              cpu: "250m"
-            limits:
-              memory: "512Mi"
-              cpu: "500m"
+            {{- toYaml .Values.backend.resources | nindent 12 }}

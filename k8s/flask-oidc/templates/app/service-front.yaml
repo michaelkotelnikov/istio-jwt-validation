@@ -4,12 +4,12 @@ metadata:
   labels:
     app: webserver
   name: webserver
-  namespace: webserver
+  namespace: {{ .Release.Namespace }}
 spec:
   ports:
-  - name: http-8080
-    port: 8080
-    targetPort: 5000
+  - name: http-{{ .Values.frontend.service.port }}
+    port: {{ .Values.frontend.service.port }}
+    targetPort: {{ .Values.frontend.service.targetPort }}
   selector:
     app: webserver
   sessionAffinity: None
