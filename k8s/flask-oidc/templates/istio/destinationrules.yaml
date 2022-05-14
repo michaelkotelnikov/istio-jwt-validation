@@ -13,7 +13,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: uid-server
-  namespace: webserver
+  namespace: {{ .Release.Namespace }}
 spec:
   host: uid-server
   trafficPolicy:

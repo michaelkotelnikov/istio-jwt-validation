@@ -6,7 +6,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: uid-server
+      {{- include "backend.selectorLabels" . | nindent 6 }}
   jwtRules:
   - issuer: {{ include "oidc.url" . }}/auth/realms/{{ .Values.oidc.realm }}
     jwksUri: {{ include "oidc.url" . }}/auth/realms/{{ .Values.oidc.realm }}/protocol/openid-connect/certs

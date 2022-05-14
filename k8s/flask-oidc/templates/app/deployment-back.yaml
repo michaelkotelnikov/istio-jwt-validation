@@ -4,21 +4,21 @@ metadata:
   name: uid-server
   namespace: {{ .Release.Namespace }}
   labels:
-    app: uid-server
+    {{- include "backend.labels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
-      app: uid-server
+      {{- include "backend.selectorLabels" . | nindent 6 }}
   replicas: 1
   template:
     metadata:
       labels:
-        app: uid-server
+        {{- include "backend.labels" . | nindent 8 }}
       annotations:
         sidecar.istio.io/inject: 'true'
     spec:
       containers:
-        - name: apache
+        - name: uid-server
           image: docker.io/mkotelni/uid-flask:0.0.2
           ports:
             - containerPort: {{ .Values.backend.service.targetPort }}

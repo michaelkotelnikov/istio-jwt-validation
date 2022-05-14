@@ -6,7 +6,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: uid-server
+      {{- include "backend.selectorLabels" . | nindent 6 }}
   action: DENY
   rules:
   - from:
