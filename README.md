@@ -89,21 +89,21 @@ HTTP/1.1 403 Forbidden
 
 2. A request with an invalid JWT token -
 ```
-$ curl http://uid-server.webserver.svc:8080/id -H "Authorization: Bearer <token>"
+$ curl http://uid-server.<application-namespace>.svc:8080/id -H "Authorization: Bearer <token>"
 HTTP/1.1 401 Unauthorized
-www-authenticate: Bearer realm="http://uid-server.webserver.svc:8080/id", error="invalid_token"
+www-authenticate: Bearer realm="http://uid-server.<application-namespace>.svc:8080/id", error="invalid_token"
 ```
 
 3. A request with an expired JWT token -
 ```
-$ curl http://uid-server.webserver.svc:8080/id -H "Authorization: Bearer <token>"
+$ curl http://uid-server.<application-namespace>.svc:8080/id -H "Authorization: Bearer <token>"
 HTTP/1.1 401 Unauthorized
-www-authenticate: Bearer realm="http://uid-server.webserver.svc:8080/id", error="invalid_token"
+www-authenticate: Bearer realm="http://uid-server.<application-namespace>.svc:8080/id", error="invalid_token"
 ```
 
 4. A request with a valid JWT token -
 ```
-curl http://uid-server.webserver.svc:8080/id -H "Authorization: Bearer <token>" -I
+curl http://uid-server.<application-namespace>.svc:8080/id -H "Authorization: Bearer <token>" -I
 HTTP/1.1 200 OK
 ```
 
