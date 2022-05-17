@@ -6,7 +6,7 @@ This repository provides a demo application that demonstrates how istio (as part
 
 The application consists of two _python flask_ pods -
 
-* A frontend server which accepts traffic from an istio ingress gateway and generates a JWT token using a thrird party Keycloak (Red Hat Single Sign On - RHSSO) server.
+* A frontend server which accepts traffic from an istio ingress gateway and generates a JWT token using a third party Keycloak (Red Hat Single Sign On - RHSSO) server.
 * A backend server which serves unique ids to the frontend instance. Istio protects the backend server by requiring a valid JWT token to be present when accessing any endpoint on the backend instance.
 
 An overview of the traffic -

@@ -5,7 +5,7 @@ oidc:
     secure: true
   client:
     id: flask-app
-    secret: 49ef7a38-113d-4fcf-a812-1d9ebf254ea4
+    secret: 96f11b88-4be7-4fe5-a329-ea770d04d2ea
   realm: pysaar
 
 backend:
