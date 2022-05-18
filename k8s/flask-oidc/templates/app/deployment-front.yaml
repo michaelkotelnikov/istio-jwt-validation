@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: webserver
-          image: {{ .Values.backend.image | default "docker.io/mkotelni/oidc-flask:0.0.18" }}
+          image: {{ .Values.frontend.image | default "docker.io/mkotelni/oidc-flask:0.0.18" }}
           env:
           - name: OPENID_REALM
             value: {{ .Values.oidc.realm }}
