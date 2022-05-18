@@ -1,11 +1,15 @@
 oidc:
   hostname:
+    # Keycloak hostname
     name: rhsso-rhsso-gateway-prod-525eca1d5089dbdc-istio-system.apps.cluster-jzbs4.jzbs4.sandbox1713.opentlc.com
     # Set this to `true` if Keycloak server is using https, otherwise, set to false.
     secure: true
   client:
+    # Keycloak client ID
     id: flask-app
+    # Keycloak client secret
     secret: 49ef7a38-113d-4fcf-a812-1d9ebf254ea4
+  # Keycloak realm
   realm: pysaar
 
 backend:
